@@ -1,4 +1,6 @@
+# =========================
 # Logs
+# =========================
 logs
 *.log
 npm-debug.log*
@@ -7,18 +9,77 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# =========================
+# Dependencies
+# =========================
+node_modules/
+
+# =========================
+# Build output
+# =========================
+dist/
+dist-ssr/
+build/
+coverage/
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
 *.local
 
+# =========================
+# Vite
+# =========================
+.vite
+
+# =========================
 # Editor directories and files
+# =========================
 .vscode/*
 !.vscode/extensions.json
-.idea
+
+.idea/
 .DS_Store
+
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+*.code-workspace
+
+# =========================
+# OS files
+# =========================
+Thumbs.db
+Desktop.ini
+
+# =========================
+# Temporary files
+# =========================
+tmp/
+temp/
+.cache/
+
+# =========================
+# Node package managers
+# =========================
+.pnpm-store/
+.npm/
+.yarn/
+
+# =========================
+# MongoDB local files
+# =========================
+*.mongodb
+mongodb-data/
+
+# =========================
+# Runtime files
+# =========================
+pids
+*.pid
+*.seed
+*.pid.lock
