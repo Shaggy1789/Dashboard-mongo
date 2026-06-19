@@ -5,6 +5,27 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>frontend-iot</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Geist+Mono:wght@100..900&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          secondary: "#0042c7",
+          tertiary: "#00677f",
+          "surface": "#f8f9fa",
+          "on-surface": "#191c1d",
+          "on-surface-variant": "#444748",
+          "outline-variant": "#c4c7c8",
+          // ... (el resto de tus colores base)
+        }
+      }
+    }
+  }
+</script>
   </head>
   <body>
     <div id="app"></div>
