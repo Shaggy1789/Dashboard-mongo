@@ -1,40 +1,90 @@
 <script setup>
 import { useRoute } from 'vue-router'
+
+// Declaramos la variable route para saber en qué página estamos
 const route = useRoute()
 </script>
 
 <template>
-  <div class="bg-surface text-on-surface selection:bg-secondary/10 min-h-screen font-sans">
-    <nav class="fixed top-0 w-full z-50 flex justify-between items-center px-8 h-20 bg-white/40 backdrop-blur-xl border-b border-white/20">
-      <div class="flex items-center gap-12">
-        <div class="flex items-center gap-3">
-          <div class="w-10 h-10 bg-secondary rounded-xl flex items-center justify-center shadow-lg shadow-secondary/20">
-            <span class="material-symbols-outlined text-white text-[24px]">analytics</span>
-          </div>
-          <span class="text-2xl font-bold tracking-tight text-on-surface">Atlas Monitor</span>
-        </div>
-        <div class="hidden md:flex items-center bg-[#f3f4f5] p-1.5 rounded-2xl border border-outline-variant/20">
-          <router-link to="/" class="px-5 py-2 text-sm font-semibold rounded-xl transition-all" exact-active-class="bg-white text-secondary shadow-sm" active-class="bg-white text-secondary shadow-sm" :class="[route.path === '/' ? '' : 'text-on-surface-variant hover:text-on-surface']">Dashboard</router-link>
-          <router-link to="/charts" class="px-5 py-2 text-sm font-medium rounded-xl transition-all" active-class="bg-white text-secondary shadow-sm" :class="[route.path.includes('/charts') ? '' : 'text-on-surface-variant hover:text-on-surface']">Reportes</router-link>
-        </div>
+  <div class="app-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">🛰️</div>
+        <h2>Sensores<span>Hub</span></h2>
       </div>
-      <div class="flex items-center gap-6"></div>
-    </nav>
+      
+      <nav class="sidebar-nav">
+        <router-link to="/" class="nav-item">🏠 Resumen</router-link>
+        <router-link to="/devices" class="nav-item">📡 Dispositivos</router-link>
+        <router-link to="/charts" class="nav-item">📊 Gráficas</router-link>
+        <router-link to="/history" class="nav-item">📜 Historial (Filtros)</router-link>
+      </nav>
+    </aside>
 
-    <main class="pt-32 pb-20 px-8 max-w-[1600px] mx-auto">
-      <router-view></router-view>
+    <main class="main-content">
+      <header class="top-header">
+        <h1>{{ route.name }}</h1>
+      </header>
+      
+      <div class="view-area">
+        <router-view></router-view>
+      </div>
     </main>
   </div>
 </template>
 
 <style>
-body {
-  font-family: 'Geist', sans-serif;
-  background-color: #f8f9fa;
-  -webkit-font-smoothing: antialiased;
+:root {
+  --bg-dark: #09090b;
+  --bg-card: #18181b;
+  --primary: #22c55e;
+  --text-main: #f4f4f5;
+  --text-muted: #a1a1aa;
+  --sidebar-width: 260px;
 }
-/* Scrollbar personalizado */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: #d9dadb; border-radius: 10px; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, sans-serif; }
+body { background-color: var(--bg-dark); color: var(--text-main); }
+
+.app-container { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--bg-card);
+  border-right: 1px solid #27272a;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+}
+
+.sidebar-header { padding: 2rem; display: flex; align-items: center; gap: 10px; }
+.logo-icon { font-size: 1.5rem; }
+.sidebar-header h2 { font-size: 1.2rem; }
+.sidebar-header span { color: var(--primary); }
+
+.sidebar-nav { flex-grow: 1; padding: 0 1rem; display: flex; flex-direction: column; gap: 0.5rem;}
+.nav-item {
+  padding: 1rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: 0.2s;
+  font-weight: 500;
+}
+.nav-item:hover, .router-link-active { background-color: #27272a; color: var(--text-main); }
+.router-link-active { border-left: 4px solid var(--primary); }
+
+.main-content { margin-left: var(--sidebar-width); flex-grow: 1; display: flex; flex-direction: column; }
+.top-header { padding: 1.5rem 2rem; background-color: rgba(9, 9, 11, 0.8); border-bottom: 1px solid #27272a; }
+.view-area { padding: 2rem; }
+
+/* Estilos compartidos para las vistas */
+.card { background-color: var(--bg-card); border-radius: 12px; padding: 1.5rem; border: 1px solid #27272a; }
+.title { color: var(--text-muted); font-size: 1rem; margin-bottom: 0.5rem; }
+.value { font-size: 2.5rem; font-weight: bold; }
+.unit { font-size: 1.2rem; color: var(--text-muted); }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th { color: var(--text-muted); padding-bottom: 1rem; border-bottom: 1px solid #3f3f46; }
+td { padding: 1rem 0; border-bottom: 1px solid #27272a; }
 </style>
